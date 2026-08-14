@@ -38,3 +38,9 @@ models/
 .env
 *.key
 secrets/
+
+# Large raw datasets (keep in local, not on GitHub)
+*.zip
+dataset /
+dataset*/
+充电数据*.xlsx
