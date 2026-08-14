@@ -146,6 +146,27 @@ fig.savefig(f'{OUT}/fig2_roc_curves.png', dpi=300)
 plt.close(fig)
 print('Fig2 saved')
 
+# ============ Fig 2b: PR curves (threshold-independent, imbalance-appropriate) ============
+from sklearn.metrics import precision_recall_curve, average_precision_score
+fig, ax = plt.subplots(figsize=(7, 6))
+for name, p in probs.items():
+    if p is None:
+        continue
+    prec, rec, _ = precision_recall_curve(y_test, p)
+    ap = average_precision_score(y_test, p)
+    ax.plot(rec, prec, lw=2, color=colors[name], label=f'{name} (PR-AUC={ap:.3f})')
+# random baseline
+ax.axhline(y_test.mean(), color='gray', ls='--', lw=1, alpha=0.7, label=f'Random (PR-AUC={y_test.mean():.3f})')
+ax.set_xlabel('Recall')
+ax.set_ylabel('Precision')
+ax.set_title('PR Curves — Cross-Station Test (owner 7-8)')
+ax.legend(loc='upper right')
+ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)
+plt.tight_layout()
+fig.savefig(f'{OUT}/fig2b_pr_curves.png', dpi=300)
+plt.close(fig)
+print('Fig2b (PR curves) saved')
+
 # ============ Fig 3: SHAP summary ============
 explainer_path = '/Users/arthas/git/excharge/docs/routeA_v2_shap.npy'
 fig, ax = plt.subplots(figsize=(9, 7))

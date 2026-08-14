@@ -1,0 +1,36 @@
+{
+  "XGBoost v1 (37特征)": {
+    "pr_auc": 0.8618,
+    "auc": 0.9885,
+    "level": "sequence"
+  },
+  "XGBoost v1+sel_v2 (57特征)": {
+    "pr_auc": 0.8932,
+    "auc": 0.988,
+    "level": "sequence"
+  },
+  "RandomForest": {
+    "pr_auc": 0.623,
+    "auc": 0.9593,
+    "level": "sequence"
+  },
+  "MLP": {
+    "pr_auc": 0.5925,
+    "auc": 0.9555,
+    "level": "sequence"
+  },
+  "random_baseline": {
+    "pr_auc": 0.0465,
+    "level": "sequence"
+  },
+  "_meta": {
+    "y_test_size": 2776,
+    "n_fault": 129,
+    "fault_rate": 0.0465
+  },
+  "Transformer (windowed)": {
+    "pr_auc": 0.0843,
+    "auc": 0.561,
+    "level": "window"
+  }
+}

@@ -44,3 +44,4 @@ secrets/
 dataset /
 dataset*/
 充电数据*.xlsx
+docs/_tmp_*.npy
