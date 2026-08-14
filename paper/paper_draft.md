@@ -142,6 +142,14 @@
 
 **关键发现**：
 
+![图 1：故障指纹——故障与正常样本特征均值对比（跨新站点测试）](figures/fig1_fault_fingerprint.png)
+
+**图 1：故障指纹——故障与正常样本特征均值对比。** (a) 非电压特征：故障样本末端 SOC 低 15.6pp、末端功率高 26.9kW、枪温反而更低；(b) 电压特征差异较小。标注数值为故障均值减正常均值。
+
+![图 2：跨站点测试集 ROC 曲线](figures/fig2_roc_curves.png)
+
+**图 2：跨站点测试集（owner 7-8）ROC 曲线。** XGBoost（57 特征）AUC=0.988，显著优于 RandomForest（0.971）与 MLP（0.851）。
+
 1. **特征工程 > 模型架构**：仅通过增加时序动力学特征（37→57 维），XGBoost Recall 从 58.14% 提升至 86.05%（+27.9pp），无需任何个性化联邦机制；
 2. **全局模型 > 复杂深度学习**：单全局 XGBoost（Recall 86.05%）显著优于窗口级 Transformer（2.79%）与个性化联邦方法（73.56%），说明跨站点泛化的核心在于特征设计而非模型复杂度的提升；
 3. **阈值工作点可调**：默认阈值 0.5 下 Recall=65.12%；降低至 0.075 可将 Recall 提升至 86.05%，同时保持 Precision=81.62%——运营中可根据实际需求在 Recall 与 Precision 之间权衡。
@@ -180,6 +188,14 @@
 | SOC 增量 | 63.4% | 75.8% | -12.4 | 故障充电量更少 |
 
 **核心洞察**：充电站故障的"故障指纹"是**大电流高功率充电段突然中断**——表现为末端 SOC 未充满、末端功率远高于正常涓流值（42.1 vs 15.3 kW）。枪温虽然在全局归因中排名第一，但故障样本的平均枪温反而**低于正常样本**（33.4 vs 43.7°C）——这是因为正常充电完整、温度持续累积，而故障充电提前终止。这一反直觉发现对运维人员的诊断逻辑具有直接指导意义。
+
+![图 3：SHAP 汇总图（Top 15 特征）](figures/fig3_shap_summary.png)
+
+**图 3：SHAP 汇总图（Top 15 特征）。** 每个点为一条测试序列；红/蓝表示特征值高低。t2_mean、t1_mean 等温度特征与 v_min 具有较大的正负 SHAP 分布跨度，是跨站点故障检测的主导信号。
+
+![图 4：SHAP 全局归因——故障样本 vs 全部样本](figures/fig4_shap_fault_vs_all.png)
+
+**图 4：SHAP 全局归因——故障样本（n=129）与全部测试样本（n=2,776）对比。** 故障样本中 t2_mean、t2_max、t1_mean 仍是主导特征，但相对贡献分布与全局略有差异，反映故障决策的"温度中心"特性。
 
 ### 4.4 阈值工作点分析
 
@@ -280,11 +296,19 @@
 
 [4] Liu R, et al. Isolation-based Anomaly Detection. ACM TKDD 2012.
 
+[5] Xu J, et al. Anomaly Transformer: Time Series Anomaly Detection with Association Discrepancy. ICLR 2022.
+
+[6] Su Y, et al. OmniAnomaly: Robust Anomaly Detection for Multivariate Time Series via Stochastic Recurrent Neural Network. KDD 2019.
+
+[7] Jain S, Wallace BC. Attention is not Explanation. NAACL 2019.
+
+[8] Lundberg SM, et al. From Local Explanations to Global Understanding with Explainable AI for Trees. Nature Machine Intelligence, 2020.
+
 [9] Lundberg SM, Lee SI. A Unified Approach to Interpreting Model Predictions. NeurIPS 2017.
 
 [10] Mitchell M, et al. Model Cards for Model Reporting. FAccT 2019.
 
-[11] KC et al. arXiv:2509.18126 (2025).
+[11] KC K, et al. Battery fault detection in EV charging via personalized federated learning. arXiv:2509.18126, 2025.
 
 [12] Regulation (EU) 2024/1689 — EU AI Act. Official Journal of the European Union, 2024.
 
