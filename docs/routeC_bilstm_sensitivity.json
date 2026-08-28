@@ -1,0 +1,101 @@
+{
+  "base": {
+    "Recall": 0.7751937984496124,
+    "F1": 0.3590664272890485,
+    "AUC": 0.9082389600044515,
+    "PR-AUC": 0.35116177903487006
+  },
+  "channel_sensitivity": {
+    "chargingv": {
+      "en": "Voltage(V)",
+      "AUC": 0.8358914435824671,
+      "AUC_drop": 0.07234751642198434,
+      "Recall": 0.3953488372093023,
+      "Recall_drop": 0.37984496124031014,
+      "F1": 0.35294117647058826,
+      "PR-AUC": 0.2869322682020251
+    },
+    "charginga": {
+      "en": "Current(A)",
+      "AUC": 0.910737034466399,
+      "AUC_drop": -0.002498074461947497,
+      "Recall": 0.8992248062015504,
+      "Recall_drop": -0.12403100775193798,
+      "F1": 0.23770491803278687,
+      "PR-AUC": 0.3240616519234993
+    },
+    "out_power": {
+      "en": "Power(kW)",
+      "AUC": 0.6814003274146834,
+      "AUC_drop": 0.2268386325897681,
+      "Recall": 0.7596899224806202,
+      "Recall_drop": 0.015503875968992276,
+      "F1": 0.13573407202216067,
+      "PR-AUC": 0.07156900056680765
+    },
+    "charging_gun_temperature1": {
+      "en": "GunTemp1(°C)",
+      "AUC": 0.9052108134702734,
+      "AUC_drop": 0.0030281465341780445,
+      "Recall": 0.6666666666666666,
+      "Recall_drop": 0.10852713178294582,
+      "F1": 0.37636761487964987,
+      "PR-AUC": 0.35543591546579645
+    },
+    "charging_gun_temperature2": {
+      "en": "GunTemp2(°C)",
+      "AUC": 0.8678919824402643,
+      "AUC_drop": 0.04034697756418715,
+      "Recall": 0.8062015503875969,
+      "Recall_drop": -0.03100775193798444,
+      "F1": 0.25060240963855424,
+      "PR-AUC": 0.23741723764836836
+    },
+    "current_soc": {
+      "en": "SOC(%)",
+      "AUC": 0.8568014689732123,
+      "AUC_drop": 0.05143749103123918,
+      "Recall": 0.7751937984496124,
+      "Recall_drop": 0.0,
+      "F1": 0.2594033722438392,
+      "PR-AUC": 0.252212785865545
+    }
+  },
+  "group_sensitivity": {
+    "electrical_VIP": {
+      "AUC": 0.7049724274665191,
+      "AUC_drop": 0.20326653253793237,
+      "Recall": 0.6356589147286822,
+      "Recall_drop": 0.13953488372093026
+    },
+    "temperature": {
+      "AUC": 0.9017550949883296,
+      "AUC_drop": 0.006483865016121859,
+      "Recall": 0.8217054263565892,
+      "Recall_drop": -0.046511627906976716
+    },
+    "soc": {
+      "AUC": 0.8568014689732123,
+      "AUC_drop": 0.05143749103123918,
+      "Recall": 0.7751937984496124,
+      "Recall_drop": 0.0
+    }
+  },
+  "model": "docs/routeC_bilstm_model.pt",
+  "feats": [
+    "chargingv",
+    "charginga",
+    "out_power",
+    "charging_gun_temperature1",
+    "charging_gun_temperature2",
+    "current_soc"
+  ],
+  "feats_en": [
+    "Voltage(V)",
+    "Current(A)",
+    "Power(kW)",
+    "GunTemp1(°C)",
+    "GunTemp2(°C)",
+    "SOC(%)"
+  ]
+}

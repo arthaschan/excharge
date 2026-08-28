@@ -16,9 +16,18 @@ data/*.csv
 *.csv
 !data/*_sample.csv
 
+# Intermediate artifacts (训练日志/预测概率/中间张量等中间产物)
+*.log
+*.npy
+*.pkl
+
 # PDF & DOCX
 *.pdf
 *.docx
+
+# References (PDF 仅本地留存，不入 git)
+references/*.pdf
+references/
 
 # Models
 *.pth
