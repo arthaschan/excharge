@@ -1,0 +1,19 @@
+# excharge H100 训练环境依赖（pip）
+# 用法: pip install -r requirements_h100.txt
+# 注: torch 请单独用 CUDA index-url 安装，见迁移手册第三节:
+#   pip install torch --index-url https://download.pytorch.org/whl/cu124
+
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+xgboost>=2.0
+lightgbm>=4.0
+pyarrow>=14.0
+matplotlib>=3.7
+scipy>=1.10
+
+# --- 按需追加（对应实验才装，避免环境冲突） ---
+# tabpfn>=2.5        # P0d: TabPFN-2.5 探路
+# ruptures>=1.1      # P0c: 特征验证-变点检测
+# catch22            # P0c: 特征验证-shape特征 (需 C 编译，装不上可用 tsfresh 替代)
+# tsaug              # P1a: 数据增强（较老，若与 numpy 2.x 冲突请用自写增强）

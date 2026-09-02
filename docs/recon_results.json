@@ -1,0 +1,18 @@
+{
+  "score_mean": {
+    "PR-AUC": 0.13997543159551354,
+    "AUC": 0.8529445357183648
+  },
+  "score_max": {
+    "PR-AUC": 0.05409630092797679,
+    "AUC": 0.574460483273444
+  },
+  "meta": {
+    "epochs": 30,
+    "hidden": 64,
+    "n_layers": 2,
+    "best_val_normal_mse": 1.758951187133789,
+    "n_train_normal": 12863,
+    "device": "mps"
+  }
+}
