@@ -25,8 +25,9 @@ torch.set_num_threads(4)
 SEED = int(os.environ.get('SEED', 42))
 torch.manual_seed(SEED); np.random.seed(SEED)
 
-DATA = '/Users/arthas/git/excharge/data/real/'
-OUT  = '/Users/arthas/git/excharge/docs/'
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = _ROOT + '/data/real/'
+OUT  = _ROOT + '/docs/'
 MAXLEN = 200
 EPOCHS = int(os.environ.get('EPOCHS', 30))
 PATIENCE = int(os.environ.get('PATIENCE', 999))  # 默认无早停(完整训练)
@@ -311,7 +312,7 @@ if __name__ == '__main__':
     only = os.environ.get('ONLY', '')
     results = {}
     for name, factory in FACTORIES.items():
-        if only and only not in name:
+        if only and only != name:
             continue
         print(f'\n========== Training {name} ==========', flush=True)
         results[name] = run_one(name, factory, LOSS_MAP.get(name, 'ce'))

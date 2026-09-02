@@ -14,6 +14,7 @@ warnings.filterwarnings('ignore')
 os.environ['OMP_NUM_THREADS'] = '4'
 import numpy as np
 import torch
+torch.backends.mha.set_fastpath_enabled(False)   # 禁用 torch2.x 原生融合 fastpath, 否则 self_attn 被绕过、hook 抓不到权重
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -29,7 +30,7 @@ os.makedirs(FIGDIR, exist_ok=True)
 K = T.TokenAttnFusion(62).K  # 8 段
 print(f'SEED={SEED} K={K} figdir={FIGDIR}', flush=True)
 
-device = torch.device('mps' if torch.backends.mps.is_available() else 'cpu')
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 torch.manual_seed(SEED); np.random.seed(SEED)
 
 # ---------- 数据 ----------

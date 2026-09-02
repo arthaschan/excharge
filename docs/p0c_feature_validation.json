@@ -1,0 +1,132 @@
+{
+  "new_feat_cols": [
+    "chargingv_d2_std",
+    "chargingv_d2_max",
+    "charginga_d2_std",
+    "charginga_d2_max",
+    "out_power_d2_std",
+    "out_power_d2_max",
+    "charging_gun_temperature1_d2_std",
+    "charging_gun_temperature1_d2_max",
+    "charging_gun_temperature2_d2_std",
+    "charging_gun_temperature2_d2_max",
+    "current_soc_d2_std",
+    "current_soc_d2_max",
+    "chargingv__charginga_corr0",
+    "chargingv__charginga_maxlag_corr",
+    "chargingv__charginga_best_lag",
+    "chargingv__out_power_corr0",
+    "chargingv__out_power_maxlag_corr",
+    "chargingv__out_power_best_lag",
+    "charginga__out_power_corr0",
+    "charginga__out_power_maxlag_corr",
+    "charginga__out_power_best_lag",
+    "charging_gun_temperature1__charging_gun_temperature2_corr0",
+    "charging_gun_temperature1__charging_gun_temperature2_maxlag_corr",
+    "charging_gun_temperature1__charging_gun_temperature2_best_lag",
+    "current_soc__out_power_corr0",
+    "current_soc__out_power_maxlag_corr",
+    "current_soc__out_power_best_lag",
+    "current_soc__chargingv_corr0",
+    "current_soc__chargingv_maxlag_corr",
+    "current_soc__chargingv_best_lag",
+    "charging_gun_temperature1__current_soc_corr0",
+    "charging_gun_temperature1__current_soc_maxlag_corr",
+    "charging_gun_temperature1__current_soc_best_lag",
+    "charging_gun_temperature2__current_soc_corr0",
+    "charging_gun_temperature2__current_soc_maxlag_corr",
+    "charging_gun_temperature2__current_soc_best_lag",
+    "chargingv_domfreq",
+    "chargingv_centroid",
+    "chargingv_flatness",
+    "chargingv_lowhigh",
+    "charginga_domfreq",
+    "charginga_centroid",
+    "charginga_flatness",
+    "charginga_lowhigh",
+    "out_power_domfreq",
+    "out_power_centroid",
+    "out_power_flatness",
+    "out_power_lowhigh",
+    "chargingv_rs",
+    "charginga_rs",
+    "out_power_rs",
+    "chargingv_nsign",
+    "charginga_nsign",
+    "out_power_nsign",
+    "charging_gun_temperature1_nsign",
+    "charging_gun_temperature2_nsign",
+    "current_soc_nsign",
+    "chargingv_maxshift",
+    "charginga_maxshift",
+    "out_power_maxshift"
+  ],
+  "group_sizes": {
+    "A_二阶差分": 12,
+    "B_滞后相关": 24,
+    "C_频域谱": 12,
+    "D_变点": 12
+  },
+  "results": {
+    "62feat_baseline": {
+      "PR-AUC": 0.8684296833301313,
+      "AUC": 0.9864641264207249,
+      "best_iter": 143,
+      "n_feat": 62
+    },
+    "62+A": {
+      "PR-AUC": 0.8776649191811084,
+      "AUC": 0.988666414809218,
+      "best_iter": 163,
+      "n_feat": 74
+    },
+    "62+AB": {
+      "PR-AUC": 0.8520749926195827,
+      "AUC": 0.9853981251262947,
+      "best_iter": 117,
+      "n_feat": 98
+    },
+    "62+ABC": {
+      "PR-AUC": 0.8444390048919891,
+      "AUC": 0.9836673373103382,
+      "best_iter": 129,
+      "n_feat": 110
+    },
+    "62+ABCD": {
+      "PR-AUC": 0.8419229519367739,
+      "AUC": 0.9834916228112562,
+      "best_iter": 130,
+      "n_feat": 122
+    },
+    "62+A_二阶差分": {
+      "PR-AUC": 0.8776649191811084,
+      "AUC": 0.988666414809218,
+      "best_iter": 163,
+      "n_feat": 74
+    },
+    "62+B_滞后相关": {
+      "PR-AUC": 0.8296902851953294,
+      "AUC": 0.9812776201228244,
+      "best_iter": 120,
+      "n_feat": 86
+    },
+    "62+C_频域谱": {
+      "PR-AUC": 0.8743522514198502,
+      "AUC": 0.9847567672046459,
+      "best_iter": 118,
+      "n_feat": 74
+    },
+    "62+D_变点": {
+      "PR-AUC": 0.8611195967462179,
+      "AUC": 0.9869180555433532,
+      "best_iter": 132,
+      "n_feat": 74
+    }
+  },
+  "baseline_62feat": {
+    "PR-AUC": 0.8684296833301313,
+    "AUC": 0.9864641264207249,
+    "best_iter": 143,
+    "n_feat": 62
+  }
+}

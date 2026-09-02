@@ -7,14 +7,15 @@
 注意: 树模型对特征 z-score 归一化不敏感, 但为与 NN 同口径仍用 X_feat(已 z-score)。
 输出: docs/gbdt_compare.json
 """
-import pickle, numpy as np, time, warnings, json
+import pickle, numpy as np, time, warnings, json, os
 warnings.filterwarnings('ignore')
 import lightgbm as lgb
 import xgboost as xgb
 from sklearn.metrics import average_precision_score, roc_auc_score, f1_score, precision_score, recall_score, accuracy_score
 
-DATA = '/Users/arthas/git/excharge/data/real/'
-OUT = '/Users/arthas/git/excharge/docs/'
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = _ROOT + '/data/real/'
+OUT = _ROOT + '/docs/'
 
 with open(f'{DATA}/fusion_data.pkl', 'rb') as f:
     D = pickle.load(f)
@@ -80,6 +81,8 @@ for name, (prob, vprob) in [('lightgbm', (p_lgb, p_lgb_va)), ('xgboost_62feat', 
     results[name]['F1_05'] = f1_score(yte, (prob >= 0.5).astype(int), zero_division=0)
 
 json.dump(results, open(f'{OUT}/gbdt_compare.json', 'w'), indent=2)
+np.save(f'{OUT}/gbdt_lightgbm_prob.npy', p_lgb)
+np.save(f'{OUT}/gbdt_xgboost62_prob.npy', p_xgb)
 print('\n=== GBDT 家族 (62 特征, owner7-8 测试) ===', flush=True)
 for k, v in results.items():
     print(f'  {k:16s} PR-AUC={v["PR-AUC"]:.4f}  AUC={v["AUC"]:.4f}  F1_05={v["F1_05"]:.4f}  calib_F1={v["calib_F1"]:.4f} (th={v["best_th"]:.2f})', flush=True)
