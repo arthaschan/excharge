@@ -1,0 +1,48 @@
+{
+  "temperature_duration_corr": {
+    "t1_max": {
+      "dur": 0.12531757225292342,
+      "soc_delta": 0.012767145478805293
+    },
+    "t2_max": {
+      "dur": 0.13882029298121948,
+      "soc_delta": -0.03384841342371631
+    },
+    "t1_mean": {
+      "dur": 0.11285940019306832,
+      "soc_delta": 0.026567044926881847
+    },
+    "t2_mean": {
+      "dur": 0.1335647738382608,
+      "soc_delta": -0.019712280462901487
+    },
+    "t2_last": {
+      "dur": 0.03429315416421051,
+      "soc_delta": -0.10177001701291052
+    },
+    "t1_last": {
+      "dur": 0.018964172565920357,
+      "soc_delta": -0.06651868281037514
+    }
+  },
+  "fault_normal": {
+    "fault_dur_med": 25.0,
+    "normal_dur_med": 52.0,
+    "fault_t2max_med": 38.0,
+    "normal_t2max_med": 48.0
+  },
+  "type_mapping": {
+    "电气中断型(类型1: 工程上报)": 123,
+    "超温型(类型2: 枪温过高断开)": 6
+  },
+  "type2_stats": {
+    "t2max_med": 59.5,
+    "dur_med": 38.0,
+    "count": 6
+  },
+  "type1_stats": {
+    "t2max_med": 37.0,
+    "dur_med": 25.0,
+    "count": 123
+  }
+}
