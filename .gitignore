@@ -23,7 +23,8 @@ data/*.csv
 
 # PDF & DOCX
 *.pdf
-*.docx
+update2/
+update3/
 
 # References (PDF 仅本地留存，不入 git)
 references/*.pdf
