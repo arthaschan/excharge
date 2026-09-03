@@ -58,3 +58,7 @@ docs/_tmp_*.npy
 # data/real 单文件均 <50MB，纳入版本控制（随代码同步，供 H100 迁移）
 !data/real/*.parquet
 !data/real/*.pkl
+
+# reproduction 复现包内置中间数据（同样纳入版本控制，保证复现包自包含）
+!reproduction/data/real/*.parquet
+!reproduction/data/real/*.pkl

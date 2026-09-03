@@ -1,0 +1,137 @@
+#!/usr/bin/env python3
+"""序列级轻量 Bi-LSTM：输入整条充电序列 [L, 6]，变长 padding。
+末端信息保留(last hidden + max pool)。阈值校准 + PR-AUC。
+"""
+import pickle, numpy as np, time, os, warnings, json
+warnings.filterwarnings('ignore')
+os.environ['OMP_NUM_THREADS'] = '4'
+import torch, torch.nn as nn
+torch.set_num_threads(4)
+torch.manual_seed(42); np.random.seed(42)
+
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = _ROOT + '/data/real/'
+OUT = _ROOT + '/docs/'
+
+with open(f'{DATA}/seq_tensors.pkl', 'rb') as f:
+    d = pickle.load(f)
+X_tr, y_tr, X_va, y_va, X_te, y_te = d['X_tr'], d['y_tr'], d['X_va'], d['y_va'], d['X_te'], d['y_te']
+FEATS = d['feats']
+print(f'feats={FEATS}', flush=True)
+print(f'Train {len(X_tr)} (fault {y_tr.sum()}), Val {len(X_va)} (fault {y_va.sum()}), Test {len(X_te)} (fault {y_te.sum()})', flush=True)
+
+MAXLEN = 200
+def pad(seqs):
+    B = len(seqs); F = len(FEATS)
+    X = np.zeros((B, MAXLEN, F), dtype=np.float32)
+    L_arr = np.zeros(B, dtype=np.int64)
+    for i, s in enumerate(seqs):
+        L = min(len(s), MAXLEN)
+        X[i, :L] = s[:L]; L_arr[i] = L
+    return X, L_arr
+
+X_tr_p, l_tr = pad(X_tr)
+X_va_p, l_va = pad(X_va)
+X_te_p, l_te = pad(X_te)
+print(f'Padded: tr {X_tr_p.shape}, va {X_va_p.shape}, te {X_te_p.shape}', flush=True)
+
+class BiLSTM(nn.Module):
+    def __init__(self, n_feat=6, hidden=64, n_layers=2, dropout=0.2):
+        super().__init__()
+        self.hidden = hidden
+        self.lstm = nn.LSTM(n_feat, hidden, num_layers=n_layers, batch_first=True,
+                            bidirectional=True, dropout=dropout)
+        self.head = nn.Sequential(
+            nn.LayerNorm(hidden*2), nn.Linear(hidden*2, 64), nn.ReLU(), nn.Dropout(dropout),
+            nn.Linear(64, 2))
+    def forward(self, x, L):
+        B, T, F = x.shape
+        packed = nn.utils.rnn.pack_padded_sequence(x, L.cpu(), batch_first=True, enforce_sorted=False)
+        out, (hn, cn) = self.lstm(packed)
+        out, _ = nn.utils.rnn.pad_packed_sequence(out, batch_first=True, total_length=T)  # (B,T,2H)
+        # 拼接: 前向最后步 + 反向第一步(=最后时刻双向) + max pool
+        fwd_last = out[torch.arange(B), L-1, :self.hidden]   # (B,H)
+        bwd_last = out[:, 0, self.hidden:]                    # 反向在 t=0 对应序列末端 (B,H)
+        last = torch.cat([fwd_last, bwd_last], dim=1)    # (B,2H)
+        # max pool (mask 掉 padding)
+        mask = torch.arange(T, device=x.device).unsqueeze(0) < L.unsqueeze(1).to(x.device)
+        out_masked = out.masked_fill(~mask.unsqueeze(-1), -1e9)
+        maxp = out_masked.max(dim=1).values               # (B,2H)
+        feat = last + maxp                                # 残差组合
+        return self.head(feat)
+
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f'Device: {device}', flush=True)
+model = BiLSTM().to(device)
+
+pos_w = float((y_tr == 0).sum()) / max(1, int((y_tr == 1).sum()))
+print(f'pos_weight={pos_w:.1f}', flush=True)
+criterion = nn.CrossEntropyLoss(weight=torch.tensor([1.0, pos_w], dtype=torch.float32).to(device))
+optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
+scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=30)
+
+X_tr_t = torch.FloatTensor(X_tr_p).to(device); l_tr_t = torch.LongTensor(l_tr)
+y_tr_t = torch.LongTensor(y_tr).to(device)
+X_va_t = torch.FloatTensor(X_va_p).to(device); l_va_t = torch.LongTensor(l_va)
+y_va_t = torch.LongTensor(y_va).to(device)
+X_te_t = torch.FloatTensor(X_te_p).to(device); l_te_t = torch.LongTensor(l_te)
+y_te_t = torch.LongTensor(y_te).to(device)
+
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, average_precision_score
+
+BATCH = 256
+EPOCHS = 30
+best_f1, best_state, best_epoch = 0, None, 0
+t_train = time.time()
+for ep in range(EPOCHS):
+    model.train()
+    perm = torch.randperm(len(X_tr_t))
+    tot_loss = 0
+    for i in range(0, len(perm), BATCH):
+        idx = perm[i:i+BATCH]
+        out = model(X_tr_t[idx], l_tr_t[idx])
+        loss = criterion(out, y_tr_t[idx])
+        optimizer.zero_grad(); loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+        optimizer.step()
+        tot_loss += loss.item()
+    scheduler.step()
+    model.eval()
+    with torch.no_grad():
+        va_out = model(X_va_t, l_va_t)
+        va_pred = va_out.argmax(1).cpu().numpy()
+        va_f1 = f1_score(y_va, va_pred, zero_division=0)
+    if va_f1 > best_f1:
+        best_f1 = va_f1; best_state = {k: v.cpu().clone() for k, v in model.state_dict().items()}; best_epoch = ep + 1
+    if (ep+1) % 5 == 0 or ep == EPOCHS-1:
+        print(f'  Epoch {ep+1}/{EPOCHS} loss={tot_loss:.4f} val_f1={va_f1:.4f} best={best_f1:.4f} (ep{best_epoch})', flush=True)
+print(f'Training done in {time.time()-t_train:.0f}s', flush=True)
+
+model.load_state_dict(best_state); model.eval()
+with torch.no_grad():
+    te_out = model(X_te_t, l_te_t)
+    te_prob = torch.softmax(te_out, 1)[:, 1].cpu().numpy()
+    te_pred = te_out.argmax(1).cpu().numpy()
+
+res = {
+    'Acc': accuracy_score(y_te, te_pred),
+    'Prec': precision_score(y_te, te_pred, zero_division=0),
+    'Recall': recall_score(y_te, te_pred),
+    'F1': f1_score(y_te, te_pred),
+    'AUC': roc_auc_score(y_te, te_prob),
+    'PR-AUC': average_precision_score(y_te, te_prob),
+}
+print('\n=== Bi-LSTM on Test (new owners 7-8), th=0.5 ===', flush=True)
+for k, v in res.items(): print(f'  {k}: {v:.4f}', flush=True)
+
+# 阈值校准扫描
+print('\n=== 阈值扫描 ===', flush=True)
+for th in [0.3, 0.4, 0.5, 0.6, 0.7]:
+    p = (te_prob >= th).astype(int)
+    print(f'  th={th}: Recall={recall_score(y_te,p,zero_division=0):.4f} Prec={precision_score(y_te,p,zero_division=0):.4f} F1={f1_score(y_te,p,zero_division=0):.4f}', flush=True)
+
+json.dump(res, open(f'{OUT}/routeC_bilstm_results.json', 'w'), indent=2)
+np.save(f'{OUT}/routeC_bilstm_prob.npy', te_prob)
+np.save(f'{OUT}/routeC_bilstm_pred.npy', te_pred)
+torch.save(best_state, f'{OUT}/routeC_bilstm_model.pt')
+print('Saved results + model.', flush=True)
