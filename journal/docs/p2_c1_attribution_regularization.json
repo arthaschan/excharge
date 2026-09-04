@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "date": "2026-09-04",
+    "env": "cuda",
+    "seed": 42,
+    "batch": 64,
+    "lambdas": [
+      0.0,
+      0.1,
+      0.5,
+      1.0
+    ],
+    "epochs": 30,
+    "prior": [
+      "p_mean",
+      "v_min",
+      "t2_mean",
+      "v_first_third_min",
+      "t1_mean",
+      "t2_max",
+      "soc_last",
+      "p_last",
+      "total_kwh",
+      "a_first_last_ratio"
+    ],
+    "protocol": "owner1-6 train / owner7-8 test, 单seed探路, BATCH=64"
+  },
+  "per_lambda": {
+    "0.0": {
+      "lambda": 0.0,
+      "PR-AUC": 0.9204244360603078,
+      "AUC": 0.9915627754690844,
+      "best_ep": 27,
+      "kl_to_prior": 1.2706953082176695,
+      "spearman_to_prior": 0.30670628863601945,
+      "sec": 302.6
+    },
+    "0.1": {
+      "lambda": 0.1,
+      "PR-AUC": 0.7520850505657604,
+      "AUC": 0.962136454022837,
+      "best_ep": 13,
+      "kl_to_prior": 0.01871897203342379,
+      "spearman_to_prior": 0.996021054425093,
+      "sec": 304.6
+    },
+    "0.5": {
+      "lambda": 0.5,
+      "PR-AUC": 0.8380031774320187,
+      "AUC": 0.9785686882619786,
+      "best_ep": 27,
+      "kl_to_prior": 0.0012944024564703804,
+      "spearman_to_prior": 0.9986904744592021,
+      "sec": 304.9
+    },
+    "1.0": {
+      "lambda": 1.0,
+      "PR-AUC": 0.7505113575051149,
+      "AUC": 0.9690391052617706,
+      "best_ep": 26,
+      "kl_to_prior": 0.0003164432003588063,
+      "spearman_to_prior": 0.999395604279533,
+      "sec": 304.7
+    }
+  },
+  "delta_vs_baseline": {
+    "0.0": 0.0,
+    "0.1": -0.1683393854945474,
+    "0.5": -0.08242125862828908,
+    "1.0": -0.1699130785551929
+  }
+}

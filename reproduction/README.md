@@ -158,11 +158,13 @@ python scripts/fig2_roc_pr.py            # 图 2（四模型 ROC+PR）→ figure
    - 置换重要性 `np.random.default_rng(0)`，n=3 次置换取平均，完全可复现；
    - GBDT/XGBoost `random_state=42`。
 
-2. **硬件浮点差异（重训 vs 原结果）**
+2. **硬件浮点差异 + batch size（重训 vs 原结果）**
    - 论文数字来自原环境（Apple Silicon MPS）的运行结果。
-   - 在 H100（CUDA）上**重训** Token-Attn/Bi-LSTM 会因 cuDNN 浮点舍入产生小幅波动
-     （单 seed PR-AUC 标准差本就约 ±0.033），但所有**结论不变**
-     （Token-Attn 0.918 > LightGBM 0.868 > XGBoost 0.887 >> Bi-LSTM ≈0.35）。
+   - **⚠️ batch size 必须为 64**：`train_c1c2.py` 原版用 `BATCH=64`；若误用默认大 batch（如 256），
+     Token-Attn 单 seed 会从 ~0.87 暴跌到 ~0.60（小样本强不平衡下优化动态显著变差）。
+     本仓库已把默认改回 `BATCH=64`（2026-09-04 修复），复现 0.918 务必确认 `BATCH=64`。
+   - 在 H100（CUDA）上以 `BATCH=64` 重训，单 seed 42 实测 PR-AUC≈0.916，与论文 0.918 吻合；
+     cuDNN 浮点舍入带来小幅波动（单 seed 标准差本就约 ±0.033），结论不变。
    - **加载已保存 checkpoint 重跑推理/归因**（非重训）可逐位复现到小数点后 4 位，
      例如置换重要性 base PR-AUC=0.91576975352594 与原始结果一致到 15 位有效数字。
 

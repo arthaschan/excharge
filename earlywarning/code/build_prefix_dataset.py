@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """build_prefix_dataset.py — Phase 1 正式版数据集构建（gate_report_phase0 §9 + 研究方案 §3 定稿口径）
 
-输入：/Users/arthas/git/excharge/data/real/all_data.parquet（155.6万采样点，31,449 事务）
+输入：<repo>/data/real/all_data.parquet（155.6万采样点，31,449 事务，路径由 BASE 派生）
 输出：
   earlywarning/data/prefix_dataset_full.parquet —— 每事务一行（固化完整序列，深度模型任意 τ 现场截段）
   earlywarning/data/split.json                    —— 跨站统一切分（owner1-6 训 → owner7-8 测，E11-2 口径固化）
@@ -18,8 +18,8 @@ import pandas as pd
 import numpy as np
 import os, json, time
 
-SRC = '/Users/arthas/git/excharge/data/real/all_data.parquet'
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SRC = os.path.join(BASE, '..', 'data', 'real', 'all_data.parquet')
 OUT_DIR = os.path.join(BASE, 'data')
 OUT_PQ = os.path.join(OUT_DIR, 'prefix_dataset_full.parquet')
 OUT_SPLIT = os.path.join(OUT_DIR, 'split.json')

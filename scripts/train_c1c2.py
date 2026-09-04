@@ -31,7 +31,7 @@ OUT  = _ROOT + '/docs/'
 MAXLEN = 200
 EPOCHS = int(os.environ.get('EPOCHS', 30))
 PATIENCE = int(os.environ.get('PATIENCE', 999))  # 默认无早停(完整训练)
-BATCH = int(os.environ.get('BATCH', 256))
+BATCH = int(os.environ.get('BATCH', 64))
 D_MODEL = 64; N_HEADS = 4; N_LAYERS = 2; FF = 128; DROPOUT = 0.1
 
 # ---------------- 数据载入 ----------------

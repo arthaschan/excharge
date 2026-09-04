@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "date": "2026-09-04",
+    "n_boot": 20,
+    "method": "LightGBM gain importance; 训练域单次 vs 测试域 bootstrap 均值",
+    "train": {
+      "n": 13505,
+      "fault": 642
+    },
+    "test": {
+      "n": 2776,
+      "fault": 129
+    }
+  },
+  "spearman_rho": 0.6418021335024792,
+  "spearman_p": 1.8943933322010172e-08,
+  "jaccard_top10": 0.4,
+  "jaccard_top20": 0.55,
+  "top10_train": [
+    "p_mean",
+    "v_min",
+    "t2_mean",
+    "v_first_third_min",
+    "t1_mean",
+    "t2_max",
+    "soc_last",
+    "p_last",
+    "total_kwh",
+    "a_first_last_ratio"
+  ],
+  "top10_test": [
+    "t1_max_jump",
+    "a_seg_change_2to3",
+    "duration_min",
+    "t2_max",
+    "a_first_last_ratio",
+    "p_last",
+    "t2_mean",
+    "v_seg_change_1to2",
+    "a_last",
+    "t2_max_jump"
+  ],
+  "top20_train": [
+    "p_mean",
+    "v_min",
+    "t2_mean",
+    "v_first_third_min",
+    "t1_mean",
+    "t2_max",
+    "soc_last",
+    "p_last",
+    "total_kwh",
+    "a_first_last_ratio",
+    "t2_last",
+    "p_max",
+    "a_min",
+    "t1_last",
+    "v_max",
+    "t2_slope",
+    "t2_std_2nd",
+    "v_mean",
+    "a_max",
+    "t1_max"
+  ],
+  "top20_test": [
+    "t1_max_jump",
+    "a_seg_change_2to3",
+    "duration_min",
+    "t2_max",
+    "a_first_last_ratio",
+    "p_last",
+    "t2_mean",
+    "v_seg_change_1to2",
+    "a_last",
+    "t2_max_jump",
+    "t1_mean",
+    "soc_last",
+    "p_min",
+    "a_min",
+    "t2_last",
+    "p_mean",
+    "t2_slope",
+    "v_mean",
+    "p_first",
+    "soc_rate"
+  ]
+}

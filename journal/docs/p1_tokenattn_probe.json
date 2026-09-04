@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "date": "2026-09-04",
+    "env": "cuda",
+    "seed": 42,
+    "epochs": 30,
+    "protocol": "owner1-6 train / owner7-8 test, seed42, 单seed探路(R9)",
+    "xai_features": [
+      "power_decay_ratio",
+      "power_tail_ratio",
+      "soc_utilization",
+      "temp_duration_rate",
+      "power_onset_ratio"
+    ]
+  },
+  "tokenattn_62": {
+    "feat_dim": 62,
+    "PR-AUC": 0.91576975352594,
+    "AUC": 0.9853395536266009,
+    "best_ep": 27,
+    "sec": 301.9
+  },
+  "tokenattn_67": {
+    "feat_dim": 67,
+    "PR-AUC": 0.8945809914609001,
+    "AUC": 0.9847509100546765,
+    "best_ep": 21,
+    "sec": 300.0
+  },
+  "delta_pr": -0.021188762065039946
+}
