@@ -1,0 +1,55 @@
+{
+  "summary": {
+    "startup": {
+      "n": 317,
+      "n_alerted": 209,
+      "alert_rate": 0.6593,
+      "ear_median": 2.0,
+      "ear_mean": 2.76,
+      "ear_dist": {
+        "1": 11,
+        "2": 144,
+        "3": 29,
+        "5": 16,
+        "10": 7,
+        "20": 2
+      },
+      "lead_median": 5.6,
+      "lead_mean": 8.5,
+      "lead_p25": 1.7,
+      "lead_p75": 12.7,
+      "n_unalerted": 108
+    },
+    "run": {
+      "n": 54,
+      "n_alerted": 44,
+      "alert_rate": 0.8148,
+      "ear_median": 2.0,
+      "ear_mean": 4.82,
+      "ear_dist": {
+        "1": 2,
+        "2": 23,
+        "3": 8,
+        "5": 4,
+        "10": 2,
+        "20": 5
+      },
+      "lead_median": 37.6,
+      "lead_mean": 40.1,
+      "lead_p25": 30.9,
+      "lead_p75": 50.9,
+      "n_unalerted": 10
+    }
+  },
+  "note": "EAR=可用τ前缀中首个P≥该τ高精度阈值的τ(val precision≥0.90 校准); lead_min=dur-EAR 为预警提前量; 不可用τ(前缀行<2,插枪晚/采样疏)不计入",
+  "thr_by_tau": {
+    "1": 0.998,
+    "2": 0.802,
+    "3": 0.832,
+    "5": 0.806,
+    "10": 0.769,
+    "20": 0.639
+  },
+  "n_fault_txn": 371,
+  "n_rows": 1314
+}

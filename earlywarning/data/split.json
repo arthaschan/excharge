@@ -1,0 +1,52 @@
+{
+  "protocol": "cross_station_owner1_6_train_to_7_8_test",
+  "note": "主口径=跨站冷启动（与会议论文一致）；同分布随机分层作为方法学内参由实验脚本按 seed 现场切分。",
+  "train_owners": [
+    "Sheet1",
+    "Sheet2",
+    "Sheet3",
+    "Sheet4",
+    "Sheet5",
+    "Sheet6"
+  ],
+  "test_owners": [
+    "Sheet7",
+    "Sheet8"
+  ],
+  "n_train_tx": 27335,
+  "n_test_tx": 4114,
+  "per_owner": {
+    "Sheet1": {
+      "n": 5204,
+      "fault": 1750
+    },
+    "Sheet2": {
+      "n": 3014,
+      "fault": 264
+    },
+    "Sheet3": {
+      "n": 6615,
+      "fault": 1656
+    },
+    "Sheet4": {
+      "n": 6016,
+      "fault": 1144
+    },
+    "Sheet5": {
+      "n": 4470,
+      "fault": 237
+    },
+    "Sheet6": {
+      "n": 2016,
+      "fault": 84
+    },
+    "Sheet7": {
+      "n": 788,
+      "fault": 500
+    },
+    "Sheet8": {
+      "n": 3326,
+      "fault": 45
+    }
+  }
+}

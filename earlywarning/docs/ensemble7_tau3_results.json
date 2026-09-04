@@ -1,0 +1,32 @@
+{
+  "tau": 3,
+  "n_test": 3640,
+  "n_seeds": 7,
+  "bootstrap_B": 2000,
+  "deep_ensemble": {
+    "PR-AUC": 0.8944,
+    "AUC": 0.9839,
+    "CI95": [
+      0.8461,
+      0.9367
+    ]
+  },
+  "lightgbm_same_protocol": {
+    "PR-AUC": 0.9238
+  },
+  "delta_mean": -0.0289,
+  "p_deep_gt_tree": 0.07,
+  "verdict": "深度与树无显著差异 (p>0.05)",
+  "by_owner": {
+    "Sheet7": {
+      "n": 531,
+      "fault": 257,
+      "deep_pr": 0.9256
+    },
+    "Sheet8": {
+      "n": 3109,
+      "fault": 20,
+      "deep_pr": 0.5076
+    }
+  }
+}
