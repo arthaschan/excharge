@@ -32,10 +32,12 @@ done
 
 echo ""
 echo "============================================================"
-echo "[2/6] 训练对比基线（LightGBM / XGBoost / 端到端 Bi-LSTM）"
+echo "[2/6] 训练对比基线（LightGBM / XGBoost / 端到端 Bi-LSTM / SOTA 深度模型 / 重建式）"
 echo "============================================================"
 $PY scripts/train_gbdt.py
 $PY scripts/train_seq_bilstm.py
+$PY scripts/train_newmodels.py      # iTransformer / PatchTST / FTTransformer / DualTransformer
+$PY scripts/train_recon.py          # 重建式 LSTM-AE（无监督）
 
 echo ""
 echo "============================================================"

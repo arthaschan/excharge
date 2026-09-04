@@ -21,6 +21,8 @@
 | LightGBM PR-AUC / AUC | 0.868 / 0.987 | train_gbdt.py → gbdt_compare.json |
 | XGBoost PR-AUC / AUC | 0.887 / 0.991 | 同上 |
 | 端到端 Bi-LSTM PR-AUC / AUC | 0.351 / 0.908 | train_seq_bilstm.py → routeC_bilstm_results.json |
+| SOTA 深度模型（iTransformer / PatchTST / FT-Transformer / DualTransformer）PR-AUC | 0.595 / 0.679 / 0.624 / 0.242 | train_newmodels.py → newmodels_*.json |
+| 重建式 LSTM-AE（无监督）PR-AUC / AUC | 0.248 / 0.912 | train_recon.py → recon_results.json |
 | vs LightGBM bootstrap p 值（PR-AUC 差） | 0.026（边际显著） | p0b_stat_test.py → p0b_stat_test.json |
 | vs XGBoost bootstrap p 值 | 0.143（未达显著） | 同上 |
 | AUC DeLong 检验 p 值 | 0.321（不显著） | 同上 |
@@ -93,6 +95,8 @@ done
 ```bash
 python scripts/train_gbdt.py             # LightGBM / XGBoost → docs/gbdt_compare.json + *_prob.npy
 python scripts/train_seq_bilstm.py       # 端到端 Bi-LSTM → docs/routeC_bilstm_results.json + _prob.npy
+python scripts/train_newmodels.py        # SOTA 深度模型(iTransformer/PatchTST/FTTransformer/DualTransformer) → docs/newmodels_*.json
+python scripts/train_recon.py            # 重建式 LSTM-AE(无监督) → docs/recon_results.json
 ```
 
 ### 4.3 集成与统计检验
@@ -132,7 +136,7 @@ python scripts/fig2_roc_pr.py            # 图 2（四模型 ROC+PR）→ figure
 
 | 论文内容 | 脚本 | 输出 |
 |----------|------|------|
-| 表 1 性能对比 | train_c1c2.py + p0a_seed_ensemble.py + train_gbdt.py + train_seq_bilstm.py | docs/p0a_seed_ensemble.json、gbdt_compare.json、routeC_bilstm_results.json |
+| 表 1 性能对比 | train_c1c2.py + p0a_seed_ensemble.py + train_gbdt.py + train_seq_bilstm.py + train_newmodels.py + train_recon.py | docs/p0a_seed_ensemble.json、gbdt_compare.json、routeC_bilstm_results.json、newmodels_*.json、recon_results.json |
 | §4.2 统计显著性（p=0.026/0.143/0.321） | p0b_stat_test.py | docs/p0b_stat_test.json |
 | §4.3 置换重要性 Top5（含 ±std） | r2_permutation_importance.py | docs/r2_permutation_importance.json |
 | §4.3 特征组消融（敏感性） | p0e_feature_ablation.py | docs/p0e_feature_ablation.json |
