@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "date": "2026-09-04",
+    "note": "方案B 多seed汇总(3 seed, 特征级MLP 62→128→64)",
+    "n_seeds": 3
+  },
+  "per_seed": {
+    "42": {
+      "random_init": 0.6493,
+      "B0_random_mask": 0.7987,
+      "B1_guided_mask": 0.6995
+    },
+    "123": {
+      "random_init": 0.6624,
+      "B0_random_mask": 0.7261,
+      "B1_guided_mask": 0.6579
+    },
+    "2024": {
+      "random_init": 0.7105,
+      "B0_random_mask": 0.7254,
+      "B1_guided_mask": 0.7108
+    }
+  },
+  "mean": {
+    "random_init": {
+      "pr_auc": 0.6740666666666667,
+      "std": 0.026311509944424633,
+      "delta_vs_random_init": 0.0
+    },
+    "B0_random_mask": {
+      "pr_auc": 0.7500666666666667,
+      "std": 0.03439014716778951,
+      "delta_vs_random_init": 0.07599999999999996
+    },
+    "B1_guided_mask": {
+      "pr_auc": 0.6894,
+      "std": 0.022746574833734105,
+      "delta_vs_random_init": 0.01533333333333331
+    }
+  }
+}

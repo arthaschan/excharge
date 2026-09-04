@@ -1,0 +1,133 @@
+{
+  "summary": {
+    "startup": {
+      "n": 317,
+      "n_alerted": 209,
+      "n_unalerted": 108,
+      "unalerted": {
+        "data_disallowed": 1,
+        "model_missed": 107,
+        "model_missed_breakdown": {
+          "model-missed/indistinguishable": 56,
+          "model-missed/partial": 44,
+          "model-missed/strong": 7
+        }
+      },
+      "alerted_n_outside": {
+        "median": 0.0,
+        "frac_0": 0.5167464114832536
+      }
+    },
+    "run": {
+      "n": 54,
+      "n_alerted": 44,
+      "n_unalerted": 10,
+      "unalerted": {
+        "data_disallowed": 0,
+        "model_missed": 10,
+        "model_missed_breakdown": {
+          "model-missed/partial": 5,
+          "model-missed/indistinguishable": 3,
+          "model-missed/strong": 2
+        }
+      },
+      "alerted_n_outside": {
+        "median": 0.0,
+        "frac_0": 0.5454545454545454
+      }
+    }
+  },
+  "margin_analysis": {
+    "startup": {
+      "n_unalerted": 108,
+      "buckets": {
+        "hard": 44,
+        "soft": 64,
+        "no-P": 0
+      },
+      "pmax_median": 0.6246579867498709,
+      "pmax_p75": 0.7932196255062665
+    },
+    "run": {
+      "n_unalerted": 10,
+      "buckets": {
+        "hard": 4,
+        "soft": 6,
+        "no-P": 0
+      },
+      "pmax_median": 0.6287742584141611,
+      "pmax_p75": 0.7483291453237516
+    }
+  },
+  "note": "可解释 EAR 诊断：每 τ 用全球 LightGBM gain 重要性 top-8 作归因特征；偏离=故障特征值落在测试站 normal 同 τ 的 [5%,95%] 分位之外；data-disallowed=最早可用 τ>3(无短前缀数据)；model-missed=有短前缀但仍未触发，按 top-k 归因特征的偏离数细分：indistinguishable(0偏离,短前缀本质上不可分)/partial/strong；margin_analysis: hard=未预警故障 Pmax<0.5(模型确信normal,短前缀信号未出现)soft=0.5<=Pmax<阈值(有信号但卡在精度阈值下)",
+  "gain_topk_by_tau": {
+    "1": [
+      "chargingv_first",
+      "charginga_first",
+      "charging_gun_temperature2_first",
+      "charging_gun_temperature1_first",
+      "out_power_first",
+      "current_soc_first",
+      "power_peak_pos",
+      "charging_gun_temperature1_min"
+    ],
+    "2": [
+      "chargingv_min",
+      "charginga_min",
+      "charging_gun_temperature2_first",
+      "chargingv_mean",
+      "charging_gun_temperature1_last",
+      "charging_gun_temperature2_last",
+      "charging_gun_temperature2_max",
+      "charging_gun_temperature2_mean"
+    ],
+    "3": [
+      "chargingv_mean",
+      "chargingv_min",
+      "charging_gun_temperature2_mean",
+      "charging_gun_temperature2_first",
+      "charging_gun_temperature1_mean",
+      "charging_gun_temperature2_max",
+      "charginga_min",
+      "charging_gun_temperature2_last"
+    ],
+    "5": [
+      "charging_gun_temperature2_max",
+      "chargingv_min",
+      "chargingv_mean",
+      "charging_gun_temperature2_last",
+      "charginga_min",
+      "charging_gun_temperature1_mean",
+      "charging_gun_temperature2_mean",
+      "chargingv_max"
+    ],
+    "10": [
+      "chargingv_min",
+      "charging_gun_temperature2_max",
+      "charginga_min",
+      "charging_gun_temperature1_mean",
+      "charging_gun_temperature2_last",
+      "charging_gun_temperature2_mean",
+      "chargingv_last",
+      "out_power_max"
+    ],
+    "20": [
+      "chargingv_min",
+      "charging_gun_temperature2_max",
+      "charging_gun_temperature2_mean",
+      "charginga_min",
+      "charging_gun_temperature1_mean",
+      "charging_gun_temperature1_last",
+      "charging_gun_temperature2_last",
+      "out_power_last"
+    ]
+  },
+  "thr_by_tau": {
+    "1": 0.998,
+    "2": 0.802,
+    "3": 0.832,
+    "5": 0.806,
+    "10": 0.769,
+    "20": 0.639
+  }
+}

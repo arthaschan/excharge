@@ -1,0 +1,7 @@
+{
+  "phase2_transformer": {
+    "AnomalyTransformer": 0.06647530691743005,
+    "TranAD": 0.14634624329866577
+  },
+  "note": "协议同 Phase 1：fusion_data.pkl，owner1-6 训(仅 normal)/owner7-8 测，test PR-AUC。AnomalyTransformer=ICLR 2022 关联差异(完整实现)；TranAD=VLDB 2022 的 transformer 重建核心(未实现 meta-learning 阶段，作 transformer 重建式代表)。"
+}

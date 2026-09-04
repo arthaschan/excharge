@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "date": "2026-09-04",
+    "env": "cuda",
+    "seed": 2024,
+    "pretrain": "掩码重建 30ep, 全量 19658 无标签(含owner7-8)",
+    "mask_ratio": 0.3,
+    "topk_guided": 10,
+    "protocol": "owner1-6 微调 / owner7-8 测, 特征级MLP(62→128→64)+head"
+  },
+  "results": {
+    "random_init": {
+      "PR-AUC": 0.710466551100923,
+      "AUC": 0.9666816023990885,
+      "best_ep": 20
+    },
+    "B0_random_mask": {
+      "PR-AUC": 0.7253641576844432,
+      "AUC": 0.9714610367741161,
+      "best_ep": 26
+    },
+    "B1_guided_mask": {
+      "PR-AUC": 0.7108280009596832,
+      "AUC": 0.968620319038959,
+      "best_ep": 20
+    }
+  }
+}

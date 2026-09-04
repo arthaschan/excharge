@@ -1,0 +1,15 @@
+{
+  "phase1_unsupervised": {
+    "LSTM-AE": 0.19673315358918328,
+    "DeepSVDD": 0.19473468239716332,
+    "USAD": 0.028738569423703487,
+    "DAGMM": 0.03157249918456377
+  },
+  "supervised_reference": {
+    "LightGBM": 0.868,
+    "XGBoost": 0.887,
+    "BiLSTM": 0.351,
+    "TokenAttn_7seed": 0.918
+  },
+  "note": "同数据(fusion_data.pkl 6通道序列)同切分(owner1-6训/owner7-8测)同指标(test PR-AUC)。无监督模型仅用 train normal 训练。监督参照为已落盘数字。"
+}

@@ -1,0 +1,18 @@
+{
+  "supervised_finetune": {
+    "BiLSTM-encoder(supervised)": 0.27462846561434134,
+    "DeepSVDD-encoder(supervised)": 0.22068488600818867,
+    "AnomalyTransformer-encoder(supervised)": 0.2902191555914124
+  },
+  "unsupervised_reference": {
+    "LSTM-AE": 0.1967,
+    "DeepSVDD": 0.1947,
+    "AnomalyTransformer": 0.0665
+  },
+  "supervised_gbdt_reference": {
+    "LightGBM": 0.868,
+    "XGBoost": 0.887,
+    "TokenAttn_7seed": 0.918
+  },
+  "note": "把标签给重建式模型的编码器(加分类头监督训练)，对比其无监督版与监督 GBDT。若给标签后仍远低于 GBDT → 根因是「范式错(吃原始序列)」而非「没标签」。协议：owner1-6 全量(含故障)监督训练 / owner7-8 测，加权 CE，PR-AUC。"
+}

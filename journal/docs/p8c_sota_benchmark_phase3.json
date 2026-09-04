@@ -1,0 +1,8 @@
+{
+  "phase3_graph_contrastive": {
+    "GDN": 0.07074896416825646,
+    "MTAD-GAT": 0.03481283091800781,
+    "DCdetector": 0.13812712473505656
+  },
+  "note": "协议同 Phase 1/2：fusion_data.pkl，owner1-6 训(仅 normal)/owner7-8 测，test PR-AUC。GDN=AAAI2021 完整实现；MTAD-GAT=ICDM2020 双 GAT(特征向+时间向)重建核心；DCdetector=2024 patch 注意力 + 中心对比核心。均为无监督。"
+}

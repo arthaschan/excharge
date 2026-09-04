@@ -1,0 +1,307 @@
+{
+  "per_tau": {
+    "1": {
+      "n_train": 3041,
+      "n_test": 483,
+      "n_test_fault": 197,
+      "lgb": {
+        "pr_auc": 0.8591,
+        "thr": 0.9983,
+        "val_prec": 0.9375,
+        "val_rec": 0.283,
+        "top_gain": [
+          "chargingv_first",
+          "charginga_first",
+          "charging_gun_temperature2_first",
+          "charging_gun_temperature1_first",
+          "out_power_first"
+        ]
+      },
+      "iforest": {
+        "pr_auc": 0.352,
+        "thr": 0.649,
+        "val_prec": 1.0,
+        "val_rec": 0.0755,
+        "top_diffi": [
+          "current_soc_last",
+          "charging_gun_temperature2_first",
+          "charging_gun_temperature2_last",
+          "charginga_min",
+          "charging_gun_temperature1_mean"
+        ]
+      },
+      "iforest_normal_only": {
+        "pr_auc": 0.3618,
+        "thr": 0.6839,
+        "val_prec": 1.0,
+        "val_rec": 0.0566
+      },
+      "interp": {
+        "spearman_rho": 0.1488,
+        "spearman_p": 0.2926,
+        "top10_overlap": 3
+      }
+    },
+    "2": {
+      "n_train": 16318,
+      "n_test": 2595,
+      "n_test_fault": 311,
+      "lgb": {
+        "pr_auc": 0.9304,
+        "thr": 0.8021,
+        "val_prec": 0.9029,
+        "val_rec": 0.7126,
+        "top_gain": [
+          "chargingv_min",
+          "charginga_min",
+          "charging_gun_temperature2_first",
+          "chargingv_mean",
+          "charging_gun_temperature1_last"
+        ]
+      },
+      "iforest": {
+        "pr_auc": 0.1131,
+        "thr": 0.6698,
+        "val_prec": 1.0,
+        "val_rec": 0.0115,
+        "top_diffi": [
+          "current_soc_last",
+          "charging_gun_temperature1_slope",
+          "out_power_max",
+          "charging_gun_temperature2_slope",
+          "charging_gun_temperature2_range"
+        ]
+      },
+      "iforest_normal_only": {
+        "pr_auc": 0.1238,
+        "thr": 0.6764,
+        "val_prec": 1.0,
+        "val_rec": 0.0115
+      },
+      "interp": {
+        "spearman_rho": 0.0496,
+        "spearman_p": 0.7269,
+        "top10_overlap": 2
+      }
+    },
+    "3": {
+      "n_train": 22690,
+      "n_test": 3640,
+      "n_test_fault": 277,
+      "lgb": {
+        "pr_auc": 0.9217,
+        "thr": 0.8317,
+        "val_prec": 0.9004,
+        "val_rec": 0.6559,
+        "top_gain": [
+          "chargingv_mean",
+          "chargingv_min",
+          "charging_gun_temperature2_mean",
+          "charging_gun_temperature2_first",
+          "charging_gun_temperature1_mean"
+        ]
+      },
+      "iforest": {
+        "pr_auc": 0.0835,
+        "thr": 1.0,
+        "val_prec": 0.0,
+        "val_rec": 0.0,
+        "top_diffi": [
+          "current_soc_last",
+          "out_power_max",
+          "charging_gun_temperature2_slope",
+          "charging_gun_temperature1_slope",
+          "charging_gun_temperature1_mean"
+        ]
+      },
+      "iforest_normal_only": {
+        "pr_auc": 0.0885,
+        "thr": 0.6675,
+        "val_prec": 1.0,
+        "val_rec": 0.0027
+      },
+      "interp": {
+        "spearman_rho": -0.1446,
+        "spearman_p": 0.3065,
+        "top10_overlap": 2
+      }
+    },
+    "5": {
+      "n_train": 22185,
+      "n_test": 3623,
+      "n_test_fault": 242,
+      "lgb": {
+        "pr_auc": 0.8909,
+        "thr": 0.8065,
+        "val_prec": 0.9,
+        "val_rec": 0.6881,
+        "top_gain": [
+          "charging_gun_temperature2_max",
+          "chargingv_min",
+          "chargingv_mean",
+          "charging_gun_temperature2_last",
+          "charginga_min"
+        ]
+      },
+      "iforest": {
+        "pr_auc": 0.0749,
+        "thr": 0.6794,
+        "val_prec": 1.0,
+        "val_rec": 0.0061,
+        "top_diffi": [
+          "current_soc_last",
+          "charging_gun_temperature2_slope",
+          "charging_gun_temperature1_slope",
+          "charging_gun_temperature2_range",
+          "out_power_max"
+        ]
+      },
+      "iforest_normal_only": {
+        "pr_auc": 0.0771,
+        "thr": 0.6702,
+        "val_prec": 1.0,
+        "val_rec": 0.0092
+      },
+      "interp": {
+        "spearman_rho": 0.0632,
+        "spearman_p": 0.6563,
+        "top10_overlap": 1
+      }
+    },
+    "10": {
+      "n_train": 21159,
+      "n_test": 3458,
+      "n_test_fault": 183,
+      "lgb": {
+        "pr_auc": 0.8245,
+        "thr": 0.7693,
+        "val_prec": 0.9024,
+        "val_rec": 0.7008,
+        "top_gain": [
+          "chargingv_min",
+          "charging_gun_temperature2_max",
+          "charginga_min",
+          "charging_gun_temperature1_mean",
+          "charging_gun_temperature2_last"
+        ]
+      },
+      "iforest": {
+        "pr_auc": 0.0631,
+        "thr": 0.6482,
+        "val_prec": 1.0,
+        "val_rec": 0.0114,
+        "top_diffi": [
+          "current_soc_last",
+          "charging_gun_temperature1_slope",
+          "charging_gun_temperature2_slope",
+          "out_power_max",
+          "gunT1_rise"
+        ]
+      },
+      "iforest_normal_only": {
+        "pr_auc": 0.066,
+        "thr": 0.6557,
+        "val_prec": 1.0,
+        "val_rec": 0.0114
+      },
+      "interp": {
+        "spearman_rho": 0.0715,
+        "spearman_p": 0.6142,
+        "top10_overlap": 3
+      }
+    },
+    "20": {
+      "n_train": 18841,
+      "n_test": 3076,
+      "n_test_fault": 104,
+      "lgb": {
+        "pr_auc": 0.6906,
+        "thr": 0.6386,
+        "val_prec": 0.9051,
+        "val_rec": 0.7222,
+        "top_gain": [
+          "chargingv_min",
+          "charging_gun_temperature2_max",
+          "charging_gun_temperature2_mean",
+          "charginga_min",
+          "charging_gun_temperature1_mean"
+        ]
+      },
+      "iforest": {
+        "pr_auc": 0.0389,
+        "thr": 0.6071,
+        "val_prec": 0.9412,
+        "val_rec": 0.0808,
+        "top_diffi": [
+          "current_soc_last",
+          "charging_gun_temperature1_slope",
+          "current_soc_slope",
+          "charging_gun_temperature2_first",
+          "charging_gun_temperature1_mean"
+        ]
+      },
+      "iforest_normal_only": {
+        "pr_auc": 0.0429,
+        "thr": 0.6324,
+        "val_prec": 1.0,
+        "val_rec": 0.0354
+      },
+      "interp": {
+        "spearman_rho": 0.0587,
+        "spearman_p": 0.6791,
+        "top10_overlap": 2
+      }
+    }
+  },
+  "ear": {
+    "lightgbm": {
+      "startup": {
+        "n": 317,
+        "n_alerted": 209,
+        "alert_rate": 0.6593,
+        "ear_median": 2.0,
+        "lead_median": 5.6
+      },
+      "run": {
+        "n": 54,
+        "n_alerted": 44,
+        "alert_rate": 0.8148,
+        "ear_median": 2.0,
+        "lead_median": 37.6
+      }
+    },
+    "isolation_forest": {
+      "startup": {
+        "n": 317,
+        "n_alerted": 0,
+        "alert_rate": 0.0,
+        "ear_median": null,
+        "lead_median": null
+      },
+      "run": {
+        "n": 54,
+        "n_alerted": 0,
+        "alert_rate": 0.0,
+        "ear_median": null,
+        "lead_median": null
+      }
+    },
+    "isolation_forest_normal_only": {
+      "startup": {
+        "n": 317,
+        "n_alerted": 0,
+        "alert_rate": 0.0,
+        "ear_median": null,
+        "lead_median": null
+      },
+      "run": {
+        "n": 54,
+        "n_alerted": 0,
+        "alert_rate": 0.0,
+        "ear_median": null,
+        "lead_median": null
+      }
+    }
+  },
+  "note": "同口径对比：同一 52 维前缀特征/同一 owner1-6→7-8 切分/同一指标。LightGBM=监督(用标签训练)；IsolationForest=无监督(fit 全部 train,不用标签)；isolation_forest_normal_only=半监督对照(仅 fit normal,堵训练集污染质疑)。两者阈值都在 val 上用标签校准到 precision≥0.90(标准做法)。DIFFI 式重要性=深度加权隔离特征重要性 imp[f]=Σ_trees Σ_nodes (n_node/n_total)/depth。IF 异常分=-score_samples(越大越异常)。"
+}
